@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Neue Aktivität</title>
+</head>
+<body>
+    <h1>Neue Aktivität hinzufügen</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p><button type="submit">Hinzufügen</button></p>
+    </form>
+</body>
+</html>
