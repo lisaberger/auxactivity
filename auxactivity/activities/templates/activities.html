@@ -6,13 +6,19 @@
 </head>
 <body>
     <h1>Aktivitäten</h1>
+    {% if user.is_authenticated  %}
+        <p>Willkommen {{ user.username }}</p>
+        <p><a href="{% url 'logout_url' %}">Logout</a></p>
+        {% else %}
+        <p><a href="{% url 'login_url' %}">Login</a></p>
+    {% endif %}
     <p><a href="{% url 'add_activity' %}">Neue Aktivität hinzufügen</a></p>
 <ul>
     {% for activity in activities %}
     <li>{{ activity.name }}
         <ul>
         {% for categories in activity.categories.all %}
-        <li>{{ categories }}</li>
+        <li>{{ categories.name }}</li>
             {% endfor %}
         </ul>
 </li>
