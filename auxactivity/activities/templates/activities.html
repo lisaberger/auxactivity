@@ -9,7 +9,13 @@
     <p><a href="{% url 'add_activity' %}">Neue Aktivität hinzufügen</a></p>
 <ul>
     {% for activity in activities %}
-    <li>{{ activity.name }}</li>
+    <li>{{ activity.name }}
+        <ul>
+        {% for categories in activity.categories.all %}
+        <li>{{ categories }}</li>
+            {% endfor %}
+        </ul>
+</li>
     {% endfor %}
 </ul>
 </body>
