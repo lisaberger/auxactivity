@@ -6,6 +6,7 @@
 </head>
 <body>
     <h1>Aktivitäten</h1>
+    <p><a href="{% url 'add_activity' %}">Neue Aktivität hinzufügen</a></p>
 <ul>
     {% for activity in activities %}
     <li>{{ activity.name }}</li>

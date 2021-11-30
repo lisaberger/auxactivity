@@ -24,7 +24,7 @@ def add_activity_view(request):
         form = ActivityForm(request.POST, request.FILES)
         if form.is_valid():  # Formular überprüfen
             form.save()
-            return HttpResponseRedirect('/')  # Umleitung
+            return HttpResponseRedirect('/activities')  # Umleitung
     else:
         form = ActivityForm()  # leeres Formular
     return render(request, 'newactivity.html', dict(form=form))
