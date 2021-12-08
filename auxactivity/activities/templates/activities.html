@@ -7,7 +7,7 @@
 <body>
     <h1>Aktivitäten</h1>
     {% if user.is_authenticated  %}
-        <p>Hallo {{ user.username }}</p>
+        <p>Hallo {{ user.username }}, hier kannst du deine Aktivitäten filtern</p>
         <p><a href="{% url 'logout_url' %}">Logout</a></p>
         {% else %}
         <p><a href="{% url 'login_url' %}">Login</a></p>
