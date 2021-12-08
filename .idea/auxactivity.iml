@@ -13,9 +13,8 @@
     <option name="TEMPLATE_FOLDERS">
       <list>
         <option value="$MODULE_DIR$/auxactivity/activities/templates" />
-        <option value="$MODULE_DIR$/auxactivity/auxactivity/templates" />
-        <option value="$MODULE_DIR$/auxactivity/accounts/templates" />
         <option value="$MODULE_DIR$/auxactivity/templates" />
+        <option value="$MODULE_DIR$/auxactivity/startpage/templates" />
       </list>
     </option>
   </component>

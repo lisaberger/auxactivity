@@ -14,3 +14,5 @@ class Activity(models.Model):
     categories = models.ManyToManyField(Category)
 
 
+
+

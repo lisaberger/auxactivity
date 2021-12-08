@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Willkommen</title>
+</head>
+<body>
+    <h1>auxactivity</h1>
+    {% if user.is_authenticated  %}
+        <p>Willkommen {{ user.username }}</p>
+        <p><a href="{% url 'activity_overview' %}">zur Aktivitätensuche</a></p>
+        <p><a href="{% url 'logout_url' %}">Logout</a></p>
+        {% else %}
+        <p>Willkommen bei auxactivity!</p>
+        <p>Log dich ein und sieh dir an, was du mit deinen Freunden unternehmen kannst.</p>
+        <p><a href="{% url 'login_url' %}">Login</a></p>
+    {% endif %}
+</body>
+</html>

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # Eigene 'APPS' (=Seiten) eintragen
     'activities',
     'accounts',
+    'startpage',
 ]
 
 MIDDLEWARE = [
