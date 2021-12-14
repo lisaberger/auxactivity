@@ -13,7 +13,23 @@
         <p><a href="{% url 'login_url' %}">Login</a></p>
     {% endif %}
     <p><a href="{% url 'add_activity' %}">Neue Aktivität hinzufügen</a></p>
-<ul>
+
+    <!-- Filter Eingabe-Formular -->
+    <form method="GET" action=".">
+        <!--{% csrf_token %}-->
+        <!-- {{ form.as_p }}-->
+        <select name="category_selected">
+            <option selected value = ""></option>
+            {% for category in categories %}
+            <option value="{{ category.name }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+        <label for="searchbar">Search</label>
+        <input type="search" name="name_search" id="searchbar" placeholder="Search Activities...">
+        <p><button type="submit">Search</button></p>
+    </form>
+
+    <ul>
     {% for activity in activities %}
     <li>{{ activity.name }}
         <ul>
@@ -21,8 +37,8 @@
         <li>{{ categories.name }}</li>
             {% endfor %}
         </ul>
-</li>
+    </li>
     {% endfor %}
-</ul>
+    </ul>
 </body>
 </html>

@@ -15,7 +15,22 @@ class ActivityForm(forms.ModelForm):
 
 def activity_overview(request):
     all_activities = models.Activity.objects.all()
-    return render(request, 'activities.html', dict(activities=all_activities))
+    all_categories = models.Category.objects.all()
+    category_selected = request.GET.get('category_selected')
+    name_search_query = request.GET.get('name_search')
+
+    if category_selected != '' and category_selected is not None:
+        all_activities = all_activities.filter(categories__name=category_selected)
+
+    elif name_search_query != '' and name_search_query is not None:
+        all_activities = all_activities.filter(name__icontains=name_search_query)
+
+    context = {
+        'activities': all_activities,
+        'categories': all_categories
+    }
+
+    return render(request, 'activities.html', context)
 
 
 def add_activity_view(request):
