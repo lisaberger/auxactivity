@@ -3,26 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Aktivitäten</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main.css' %}">
 </head>
 <body>
-    <h1>Aktivitäten</h1>
-    {% if user.is_authenticated  %}
-        <p>Hallo {{ user.username }}, hier kannst du deine Aktivitäten filtern</p>
-        <p><a href="{% url 'logout_url' %}">Logout</a></p>
-        {% else %}
-        <p><a href="{% url 'login_url' %}">Login</a></p>
-    {% endif %}
-    <p><a href="{% url 'add_activity' %}">Neue Aktivität hinzufügen</a></p>
-<ul>
+    <div id="hintergrund"></div>
+    <div id="wrapper">
+    <nav>
+         <ul>
+            {% if user.is_authenticated  %}
+                <li>Hallo {{ user.username }}, hier kannst du deine Aktivitäten filtern</li>
+                <li><a href="{% url 'logout_url' %}">Logout</a></li>
+            {% endif %}
+            <li><a href="{% url 'add_activity' %}">Neue Aktivität hinzufügen</a></li>
+         </ul>
+    </nav>
+
+    <header>
+        <h3>Filter</h3>
+    </header>
+
+    <main>
+    <div class="containerActivity">
     {% for activity in activities %}
-    <li>{{ activity.name }}
-        <ul>
+        <div>
+        <h3>{{ activity.name }}</h3>
+
         {% for categories in activity.categories.all %}
-        <li>{{ categories.name }}</li>
+        <p>{{ categories.name }}</p>
+
             {% endfor %}
-        </ul>
-</li>
+        </div>
+
     {% endfor %}
-</ul>
+    </div>
+    </main>
+    </div>
 </body>
 </html>
