@@ -3,19 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Willkommen</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main-startpage.css' %}">
 </head>
 <body>
+<div id="hintergrund"></div>
+<div id="wrapper">
+    <header>
     <h1>auxactivity</h1>
+    </header>
     {% if user.is_authenticated  %}
-        <p>Willkommen {{ user.username }}</p>
-        <p><a href="{% url 'activity_overview' %}">zur Aktivitätensuche</a></p>
-        <p><a href="{% url 'logout_url' %}">Logout</a></p>
-        {% else %}
-        <p>Willkommen bei auxactivity!</p>
-        <p>Log dich ein und sieh dir an, was du mit deinen Freunden unternehmen kannst.</p>
-        <p><a href="{% url 'login_url' %}">Login</a></p>
-        <p><a href="{% url 'register_url' %}">Registrieren</a></p>
+            <main>
+                <p>Willkommen {{ user.username }}</p>
+                <p><button><a href="{% url 'activity_overview' %}">zur Aktivitätensuche</a></button></p>
+            </main>
+            <nav>
+            <ul>
+                <li><a href="{% url 'logout_url' %}">Logout</a></li>
+            </ul>
+            </nav>
 
+        {% else %}
+            <main>
+                <p>Willkommen bei auxactivity!</p>
+                <p>Log dich ein und sieh dir an, was du mit deinen Freunden unternehmen kannst.</p>
+            </main>
+            <nav>
+                    <ul>
+                        <li><a href="{% url 'login_url' %}">Login</a></li>
+                        <li><a href="{% url 'register_url' %}">Registrieren</a></li>
+                    </ul>
+            </nav>
     {% endif %}
+</div>
 </body>
 </html>

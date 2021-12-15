@@ -3,14 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Neue Aktivität</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main-activities.css' %}">
 </head>
 <body>
-    <h1>Neue Aktivität hinzufügen</h1>
-    <p><a href="{% url 'activity_overview' %}">Zurück</a></p>
-    <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <p><button type="submit">Hinzufügen</button></p>
-    </form>
+    <div id="hintergrund"></div>
+    <div id="wrapper">
+        <nav>
+            <ul>
+                 <li><a href="{% url 'activity_overview' %}">Zurück</a></li>
+            </ul>
+        </nav>
+
+        <header>
+            <h3>Neue Aktivität hinzufügen</h3>
+        </header>
+        <main>
+            <form class="new-activity" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <p><button type="submit">Hinzufügen</button></p>
+            </form>
+
+        </main>
+    </div>
 </body>
 </html>

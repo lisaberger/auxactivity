@@ -218,3 +218,14 @@ header {
     float: right;
     transform: rotate(-10deg);
 }
+.new-activity{
+    margin-left: 60px;
+}
+.new-activity label{
+    margin-right: 40px;
+}
+.new-activity textarea, select, input {
+    vertical-align: top;
+}
+
+
