@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auswählen</title>
+     {% load static %}
+    <link rel="stylesheet" href="{% static 'main-activities.css' %}">
+</head>
+<body>
+
+<form action="" method="get">
+
+    <p><label>
+        Kategorie:
+            {% for category in categories %}
+            <input type="checkbox" name="category" value="{{ category.id }}">{{ category.name }}</input>
+            {% endfor %}
+    </label></p>
+    <p><button type="submit">filtern</button></p>
+</form>
+
+<div class="containerActivity">
+    {% for activity in activities.all %}
+        <div>
+        <h3>{{ activity.name }}</h3>
+
+        {% for categories in activity.categories.all %}
+        <p>{{ categories.name }}</p>
+
+            {% endfor %}
+        </div>
+
+    {% endfor %}
+    </div>
+
+
+</body>
+</html>

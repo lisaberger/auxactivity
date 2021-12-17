@@ -43,3 +43,24 @@ def add_activity_view(request):
     else:
         form = ActivityForm()  # leeres Formular
     return render(request, 'newactivity.html', dict(form=form))
+
+
+
+def filter_form(request):
+    all_categories = models.Category.objects.all()
+
+    category_id = request.GET.get('category')  # nur Text oder None
+
+    if category_id:
+        activities = models.Activity.objects.filter(categories=int(category_id))
+    else:
+        activities = []
+
+    return render(request, 'choose.html', dict(
+        categories=all_categories,
+        activities=activities,
+    ))
+
+
+
+

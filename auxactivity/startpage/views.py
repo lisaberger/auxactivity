@@ -6,4 +6,3 @@ from . import models
 # Create your views here.
 def startpage_overview(request):
     return render(request, 'startpage.html')
-
