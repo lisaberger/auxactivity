@@ -159,6 +159,7 @@ header {
 }
 
 .containerActivity>div {
+    position: relative;
     min-width: 10%;
     max-width: 20%;
     background-color: white;
@@ -227,5 +228,3 @@ header {
 .new-activity textarea, select, input {
     vertical-align: top;
 }
-
-

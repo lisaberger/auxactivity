@@ -14,18 +14,21 @@
             {% if user.is_authenticated  %}
                 <li>Hallo {{ user.username }}, hier kannst du deine Aktivitäten filtern</li>
                 <li><a href="{% url 'logout_url' %}">Logout</a></li>
+                <li><a href="{% url 'profile_url' %}">Mein Profil</a></li>
             {% endif %}
             <li><a href="{% url 'add_activity' %}">Neue Aktivität hinzufügen</a></li>
          </ul>
     </nav>
 
     <header>
+        <h1>auxactivity</h1>
         <h3>Filter</h3>
         <!-- Filter Eingabe-Formular -->
     <form method="GET" action=".">
         <!--{% csrf_token %}-->
         <!-- {{ form.as_p }}-->
         <select name="category_selected">
+        <!--<select name="categoryies_selected" multiple>-->
             <option selected value = ""></option>
             {% for category in categories %}
             <option value="{{ category.name }}">{{ category.name }}</option>
@@ -41,17 +44,17 @@
     <div class="containerActivity">
     {% for activity in activities %}
         <div>
-        <h3>{{ activity.name }}</h3>
+            <h3>{{ activity.name }}</h3>
 
-        {% for categories in activity.categories.all %}
-        <p>{{ categories.name }}</p>
-
+            {% for categories in activity.categories.all %}
+                <p>{{ categories.name }}</p>
             {% endfor %}
+            <a style="color: black" href="{% url 'activity' activity.id %}">Details</a>
         </div>
-
     {% endfor %}
     </div>
     </main>
+
     </div>
 </body>
 </html>

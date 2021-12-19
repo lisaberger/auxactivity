@@ -7,31 +7,39 @@
     <link rel="stylesheet" href="{% static 'main-activities.css' %}">
 </head>
 <body>
+    <nav>
+         <ul>
+            {% if user.is_authenticated  %}
+                <li>Hallo {{ user.username }}, hier kannst du deine Aktivitäten filtern</li>
+                <li><a href="{% url 'logout_url' %}">Logout</a></li>
+            {% endif %}
+            <li><a href="{% url 'add_activity' %}">Neue Aktivität hinzufügen</a></li>
+         </ul>
+    </nav>
+    <form action="" method="get">
 
-<form action="" method="get">
+        <p><label>
+            Kategorie:
+                {% for category in categories %}
+                <input type="checkbox" name="category" value="{{ category.id }}">{{ category.name }}</input>
+                {% endfor %}
+        </label></p>
+        <p><button type="submit">filtern</button></p>
+    </form>
 
-    <p><label>
-        Kategorie:
-            {% for category in categories %}
-            <input type="checkbox" name="category" value="{{ category.id }}">{{ category.name }}</input>
-            {% endfor %}
-    </label></p>
-    <p><button type="submit">filtern</button></p>
-</form>
+    <div class="containerActivity">
+        {% for activity in activities.all %}
+            <div>
+            <h3>{{ activity.name }}</h3>
 
-<div class="containerActivity">
-    {% for activity in activities.all %}
-        <div>
-        <h3>{{ activity.name }}</h3>
+            {% for categories in activity.categories.all %}
+            <p>{{ categories.name }}</p>
 
-        {% for categories in activity.categories.all %}
-        <p>{{ categories.name }}</p>
+                {% endfor %}
+            </div>
 
-            {% endfor %}
+        {% endfor %}
         </div>
-
-    {% endfor %}
-    </div>
 
 
 </body>

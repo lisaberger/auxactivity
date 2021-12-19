@@ -9,7 +9,15 @@ from .models import UserProfile
 
 
 def profile_view(request):
-    pass
+    current_user = request.user
+    user_profile = UserProfile.objects.get(user_id=request.user.id)
+
+    context = {
+        'user': current_user,
+        'profile': user_profile
+    }
+
+    return render(request, 'registration/profile.html', context)
 
 
 def login_view(request):
