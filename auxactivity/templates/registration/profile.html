@@ -13,13 +13,20 @@
             <h1>Benutzerprofil</h1>
             <p>{{ user.username }}</p>
     <div style="display: flex; justify-content: center">
-{#        <img src="../../media/avatars/garmisch_2021_2.jpg" style="width: 20%; border-radius: 50%; object-fit: cover">#}
         <img src="{{ profile.avatar.url }}" style="width: 20%; border-radius: 50%; object-fit: cover">
         <p>{{ user.username }}</p>
         <p>{{ user.first_name }}</p>
         <p>{{ user.last_name }}</p>
     </div>
     <p><a href="{% url 'activity_overview' %}">Zurück</a></p>
+    <h3>Meine Aktivitäten</h3>
+    <ul>
+        {% for created_activity in created_activities %}
+        <li>{{ created_activity.name }}</li>
+        {% endfor %}
+    </ul>
+
+
 
     </div>
 </body>

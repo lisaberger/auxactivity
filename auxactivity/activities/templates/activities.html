@@ -50,6 +50,11 @@
                 <p>{{ categories.name }}</p>
             {% endfor %}
             <a style="color: black" href="{% url 'activity' activity.id %}">Details</a>
+
+            <form action="" method="GET">
+            {% csrf_token %}
+                <button type="submit" name="activity_to_participate" value="{{ activity.id }}">Teilnehmen</button>
+            </form>
         </div>
     {% endfor %}
     </div>

@@ -10,7 +10,7 @@ class ActivityForm(forms.ModelForm):
     """Klasse zur Formularerstellung"""
     class Meta:
         model = models.Activity
-        exclude = []
+        exclude = ['creator', 'participants']
 
 
 def activity_overview(request):
@@ -32,6 +32,14 @@ def activity_overview(request):
         'categories': all_categories
     }
 
+    # An Aktivität teilnehmen
+    # activity_id = request.GET['activity_to_participate']
+    # activity = models.Activity.objects.all().get(id=activity_id)
+    # print(activity_id)
+    # current_user = request.user
+    # activity.participants.add(current_user)
+    # activity.save()
+
     return render(request, 'activities.html', context)
 
 
@@ -39,6 +47,7 @@ def add_activity_view(request):
     # werden Formulardaten geschickt?
     if request.method == "POST":
         form = ActivityForm(request.POST, request.FILES)
+        form.instance.creator = request.user
         if form.is_valid():  # Formular überprüfen
             form.save()
             return HttpResponseRedirect('/act/activities')  # Umleitung

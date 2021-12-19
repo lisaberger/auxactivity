@@ -6,6 +6,13 @@
 </head>
 <body>
     <h1>{{ activity.name }}</h1>
+    <h3>Infos</h3>
+    <p> {{ activity.description }}</p>
+
+    <h3>Teilnehmer</h3>
+    {% for participant in activity.participants.all %}
+    <p>{{ participant.username }}</p>
+    {% endfor %}
 
 
 </body>
