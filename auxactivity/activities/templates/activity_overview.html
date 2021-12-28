@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aktivitäten</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'activity.css' %}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+    </style>
+</head>
+<body>
+    <body>
+        <header class="header">
+            <nav class="navbar">
+                <a href="{% url 'startpage' %}" class="nav-logo">auxactivity</a>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="{% url 'add_activity' %}"><button class="act-btn">Aktivität hinzufügen</button></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'logout_url' %}" class="nav-link">logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'profile_url' %}" class="nav-link">mein profil</a>
+                        <img src="{{ profile.avatar.url }}">
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+
+            <article class="filter-area">
+                <!--Filter Bereich hier Stylen-->
+                <h2>Finde spannende Aktivitäten</h2>
+
+                <form class="form-inline" method="GET" action=".">
+                    <select class="select-wrapper fa fa-car" name="category_selected" aria-placeholder="Choose Category">
+                        <!--<select name="categoryies_selected" multiple>-->
+                            <option selected value = ""></option>
+                            {% for category in categories %}
+                            <option value="{{ category.name }}">{{ category.name }}</option>
+                            {% endfor %}
+                    </select>
+                    <input class="searchbar" type="search" name="name_search" id="searchbar" placeholder="Search Activities...">
+                    <p><button class="srch-btn" type="submit">Filtern</button></p>
+                </form>
+            </article>
+        </header>
+        <main>
+            <article class="activity-area">
+                <!--activity items here-->
+                {% for activity in activities %}
+                    <div class="activity-item">
+                        <img src="{{ activity.image.url }}">
+                        <section class="category-area">
+                            {% for categories in activity.categories.all %}
+                                <span class="category-item">{{ categories.name }}</span>
+                            {% endfor %}
+                        </section>
+                        <section class="activity-attributes">
+                            <h3>{{ activity.name }}</h3>
+                            <p>{{ activity.location }}</p>
+                            <p><a href="{% url 'activity' activity.id %}">details</a></p>
+                            <form action="" method="POST">
+                            {% csrf_token %}
+                            <button class="act-btn" type="submit" name="activity_to_participate" value="{{ activity.id }}">Teilnehmen</button>
+                            </form>
+                            <!-- <p id="creator">erstellt von lisab</p> -->
+                        </section>
+                    </div>
+                {% endfor %}
+            </article>
+        </main>
+
+{#        <script src="{% static 'js/script.js' %}"></script>#}
+    </body>
+</html>

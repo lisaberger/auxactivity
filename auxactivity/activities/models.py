@@ -17,6 +17,8 @@ class Activity(models.Model):
     categories = models.ManyToManyField(Category)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     participants = models.ManyToManyField(User, related_name='re_participants', null=True)
+    image = models.ImageField('Activities', upload_to="activities", default="activities/activity_default_placeholder.png")
+    location = models.CharField(max_length=300, default="Augsburg")
 
     def __str__(self):
         return self.name

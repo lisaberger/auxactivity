@@ -1,7 +1,7 @@
 #Eigene URLs für Startseite
 from django.urls import path
-from startpage.views import startpage_overview
+from startpage.views import startpage_view
 
 urlpatterns = [
-    path('', startpage_overview, name="startpage"),
+    path('', startpage_view, name="startpage"),
 ]

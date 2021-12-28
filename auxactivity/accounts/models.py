@@ -6,4 +6,4 @@ from django.db import models
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField('Avatar', upload_to="avatars")
+    avatar = models.ImageField('Avatar', upload_to="avatars", default="avatars/avatar_default_placeholder.png")

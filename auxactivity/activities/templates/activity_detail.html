@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aktivitäten</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'activity_detail.css' %}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+    </style>
+</head>
+<body>
+    <body>
+        <header class="header">
+            <nav class="navbar">
+                <a href="{% url 'startpage' %}" class="nav-logo">auxactivity</a>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="{% url 'logout_url' %}" class="nav-link">logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'profile_url' %}" class="nav-link">mein profil</a>
+                        <img src="{{ user_profile.avatar.url }}">
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </header>
+        <main class="contend-centered">
+            <h1>{{ activity.name }}</h1>
+            <div>
+                <p class="inline-block">erstellt von {{ activity.creator }}</p>
+                <img id="profile" src="{{ creator_profile.avatar.url }}">
+            </div>
+            <img src="{{ activity.image.url }}">
+            <p>{{ activity.location }}</p>
+            <p>{{ activity.description }}</p>
+            <h2>Teilnehmer</h2>
+
+            <ul>
+                {% for participant in activity.participants.all %}
+                    <li>{{ participant.username }}</li>
+                {% endfor %}
+            </ul>
+            <form action="" method="POST">
+                {% csrf_token %}
+            <button class="join-btn" type="submit" name="activity_to_participate" value="{{ activity.id }}">Teilnehmen</button>
+            </form>
+            <p><a href="{% url 'activity_overview' %}">Zurück</a></p>
+        </main>
+
+{#        <script src="../js/script.js"></script>#}
+    </body>
+</html>

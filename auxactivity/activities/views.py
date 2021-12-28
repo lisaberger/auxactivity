@@ -1,7 +1,10 @@
 from django import forms
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from . import models
+from accounts.models import UserProfile
 
 # Create your views here.
 
@@ -13,7 +16,13 @@ class ActivityForm(forms.ModelForm):
         exclude = ['creator', 'participants']
 
 
+@login_required()
 def activity_overview(request):
+    # Logged in user profile picture
+    current_user = request.user
+    user_profile = UserProfile.objects.get(user_id=current_user.id)
+
+    # Filters
     all_activities = models.Activity.objects.all()
     all_categories = models.Category.objects.all()
     category_selected = request.GET.get('category_selected')
@@ -29,20 +38,23 @@ def activity_overview(request):
 
     context = {
         'activities': all_activities,
-        'categories': all_categories
+        'categories': all_categories,
+        'profile': user_profile
     }
 
     # An Aktivität teilnehmen
-    # activity_id = request.GET['activity_to_participate']
-    # activity = models.Activity.objects.all().get(id=activity_id)
-    # print(activity_id)
-    # current_user = request.user
-    # activity.participants.add(current_user)
-    # activity.save()
+    if request.POST:
+        activity_id = request.POST['activity_to_participate']
+        activity = models.Activity.objects.all().get(id=activity_id)
+        print(activity_id)
+        current_user = request.user
+        activity.participants.add(current_user)
+        activity.save()
 
-    return render(request, 'activities.html', context)
+    return render(request, 'activity_overview.html', context)
 
 
+@login_required()
 def add_activity_view(request):
     # werden Formulardaten geschickt?
     if request.method == "POST":
@@ -56,10 +68,32 @@ def add_activity_view(request):
     return render(request, 'newactivity.html', dict(form=form))
 
 
+@login_required()
 def activity_detail_view(request, activity_id):
-    # activity_id = request.GET['id']
     activity = models.Activity.objects.all().get(id=activity_id)
-    return render(request, 'activity.html', dict(activity=activity))
+
+    # Logged in user Profile Picture
+    current_user = request.user
+    user_profile = UserProfile.objects.get(user_id=current_user.id)
+
+    # Creator Profile Picture
+    creatorofActivity = activity.creator
+    creator_profile = UserProfile.objects.get(user_id=creatorofActivity.id)
+
+    # An Aktivität teilnehmen
+    if request.POST:
+        activity_id = request.POST['activity_to_participate']
+        activity = models.Activity.objects.all().get(id=activity_id)
+        print(activity_id)
+        current_user = request.user
+        activity.participants.add(current_user)
+        activity.save()
+
+    return render(request, 'activity_detail.html',
+                  dict(activity=activity,
+                       user_profile=user_profile,
+                       creator_profile=creator_profile)
+                  )
 
 
 def filter_form(request):

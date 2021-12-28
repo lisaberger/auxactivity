@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Willkommen</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'main.css' %}">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+        </style>
+    </head>
+    <body>
+        <header class="header">
+            <nav class="navbar">
+                <a href="{% url 'startpage' %}" class="nav-logo">auxactivity</a>
+                <ul class="nav-menu">
+                    {% if user.is_authenticated  %}
+                    <li class="nav-item">
+                        <a href="{% url 'activity_overview' %}" class="nav-link">aktivitäten</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'logout_url' %}" class="nav-link">logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'profile_url' %}" class="nav-link">mein profil</a>
+                        <img src="{{ profile.avatar.url }}">
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'login_url' %}" class="nav-link">login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'register_url' %}" class="nav-link">registrieren</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </header>
+
+        <main class="content">
+            <article class="welcome">
+                <h1>Willkommen</h1>
+                {% if user.is_authenticated  %}
+                <h2 class="space-left">{{ user.username }}</h2>
+                <p>Finde jetzt spannende </br>
+                Aktivitäten für dich </br>
+                und deine Freunde.
+                </p>
+                    <a href="{% url 'activity_overview' %}"><button class="main_btn">Zur Aktivitätensuche</button></a>
+                {% else %}
+                 <h2 class="space-left">bei auxactivity!</h2>
+                <p>Log dich ein und sieh dir an, </br>
+                was du mit deinen Freunden </br>
+                unternehmen kannst.
+                </p>
+                {% endif %}
+            </article>
+            <img class="illustration" src="{% static '/img/illustration_vecteezy.png' %}">
+        </main>
+
+        <script src="{% static 'js/script.js' %}"></script>
+    </body>
+</html>

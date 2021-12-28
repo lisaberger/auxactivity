@@ -4,11 +4,12 @@ from django.conf import settings
 from django.db.models.signals import post_save
 from .models import UserProfile
 from activities import models
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
 
-
+@login_required()
 def profile_view(request):
     current_user = request.user
     user_profile = UserProfile.objects.get(user_id=current_user.id)
