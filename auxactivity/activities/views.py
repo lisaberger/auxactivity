@@ -26,6 +26,7 @@ def activity_overview(request):
     all_activities = models.Activity.objects.all()
     all_categories = models.Category.objects.all()
     category_selected = request.GET.get('category_selected')
+
     # categories_selected = request.GET.getlist('category_selected')
     name_search_query = request.GET.get('name_search')
 

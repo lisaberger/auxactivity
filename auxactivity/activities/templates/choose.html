@@ -1,46 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Auswählen</title>
-     {% load static %}
-    <link rel="stylesheet" href="{% static 'main-activities.css' %}">
-</head>
-<body>
-    <nav>
-         <ul>
-            {% if user.is_authenticated  %}
-                <li>Hallo {{ user.username }}, hier kannst du deine Aktivitäten filtern</li>
-                <li><a href="{% url 'logout_url' %}">Logout</a></li>
-            {% endif %}
-            <li><a href="{% url 'add_activity' %}">Neue Aktivität hinzufügen</a></li>
-         </ul>
-    </nav>
-    <form action="{% url 'activity_overview' %}" method="get">
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Auswählen</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'filter.css' %}">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+        </style>
+    </head>
+    <body>
+        <header class="header">
+            <nav class="navbar">
+                <a href="{% url 'startpage' %}" class="nav-logo">auxactivity</a>
+                <ul class="nav-menu">
+                    {% if user.is_authenticated  %}
+                    <li class="nav-item">
+                        <a href="{% url 'activity_overview' %}" class="nav-link">aktivitäten</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'logout_url' %}" class="nav-link">logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'profile_url' %}" class="nav-link">mein profil</a>
+                        <img src="{{ profile.avatar.url }}">
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'login_url' %}" class="nav-link">login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'register_url' %}" class="nav-link">registrieren</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </header>
 
-        <p><label>
-            Kategorie:
-                {% for category in categories %}
-                <input type="checkbox" name="category" value="{{ category.id }}">{{ category.name }}</input>
+        <main class="content">
+            <form action="{% url 'activity_overview' %}" method="get">
+
+                <label>
+                    Kategorie:
+                        {% for category in categories %}
+                        <input class="boxen" type="checkbox" name="category_selected" value="{{ category.name }}">{{ category.name }}</input>
+                        {% endfor %}
+                </label> <br/>
+                <button class="act-btn" type="submit">Weiter</button>
+            </form>
+
+           <div class="containerActivity">
+                {% for activity in activities.all %}
+                    <div>
+                    <h3>{{ activity.name }}</h3>
+
+                    {% for categories in activity.categories.all %}
+                    <p>{{ categories.name }}</p>
+
+                        {% endfor %}
+                    </div>
+
                 {% endfor %}
-        </label></p>
-        <p><button type="submit">filtern</button></p>
-    </form>
-
-    <div class="containerActivity">
-        {% for activity in activities.all %}
-            <div>
-            <h3>{{ activity.name }}</h3>
-
-            {% for categories in activity.categories.all %}
-            <p>{{ categories.name }}</p>
-
-                {% endfor %}
-            </div>
-
-        {% endfor %}
-        </div>
-
-
-</body>
+           </div>
+        </main>
+        <script src="{% static 'js/script.js' %}"></script>
+    </body>
 </html>
