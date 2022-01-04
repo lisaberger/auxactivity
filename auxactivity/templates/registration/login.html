@@ -5,18 +5,25 @@
     <title>Login</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'main-registration.css' %}">
+    <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+    </style>
 </head>
 <body>
-    <div id="hintergrund"></div>
-    <div id="wrapper">
-        <header>
-            <h1>System Login</h1>
+    <header class="header">
+            <nav class="navbar">
+                <a href="{% url 'startpage' %}" class="nav-logo">auxactivity</a>
+            </nav>
         </header>
-        <main>
-            <form method="POST">
+
+        <main class="content">
+
+            <form class="form" method="POST">
+                <h1>Login</h1>
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button>Login</button>
+                <button class="act-btn">Login</button>
+                <p class="zurueck"><a href="{% url 'startpage' %}">Zurück</a></p>
             </form>
         </main>
     </div>

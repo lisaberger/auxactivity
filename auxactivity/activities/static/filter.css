@@ -176,9 +176,6 @@ a:active {
     color: #a3b31c;
 }
 
-a:visited {
-    color: white;
-}
 
 .Container_Auswahl {
     margin-right: 20%;
@@ -219,7 +216,8 @@ a:visited {
 
 .act-btn {
     margin: auto;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
     background-color: #A1AA3D;
     border: none;
     border-radius: 10rem;
