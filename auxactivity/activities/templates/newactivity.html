@@ -4,28 +4,42 @@
     <meta charset="UTF-8">
     <title>Neue Aktivität</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'main-activities.css' %}">
+    <link rel="stylesheet" href="{% static 'newactivity.css' %}">
+    <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+    </style>
 </head>
 <body>
-    <div id="hintergrund"></div>
-    <div id="wrapper">
-        <nav>
-            <ul>
-                 <li><a href="{% url 'activity_overview' %}">Zurück</a></li>
-            </ul>
+    <header class="header">
+        <nav class="navbar">
+            <a href="{% url 'startpage' %}" class="nav-logo">auxactivity</a>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="{% url 'logout_url' %}" class="nav-link">logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'profile_url' %}" class="nav-link">mein profil</a>
+                        <img src="{{ profile.avatar.url }}">
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
         </nav>
+    </header>
 
-        <header>
-            <h3>Neue Aktivität hinzufügen</h3>
-        </header>
-        <main>
-            <form class="new-activity" action="" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <p><button type="submit">Hinzufügen</button></p>
-            </form>
+    <main class="content">
+        <form class="new-activity" action="" method="post" enctype="multipart/form-data">
+            <h1>Neue Aktivität hinzufügen</h1>
+            <p class="subtext">Erstelle eine Aktivität für dich und deine Freunde</p>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="act-btn" type="submit">Hinzufügen</button>
+            <p class="zurueck"><a href="{% url 'startpage' %}">Zurück</a></p>
+        </form>
 
-        </main>
-    </div>
+    </main>
 </body>
 </html>
