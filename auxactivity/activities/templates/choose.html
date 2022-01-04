@@ -44,30 +44,28 @@
         </header>
 
         <main class="content">
-            <form action="{% url 'activity_overview' %}" method="get">
+             <form id="form" action="{% url 'activity_overview' %}" method="get">
+            <h1>Nach was suchst du?</h1>
+            <p>Wähle passende Kategorien für deine Aktivität.</p>
 
-                <label>
-                    Kategorie:
-                        {% for category in categories %}
-                        <input class="boxen" type="checkbox" name="category_selected" value="{{ category.name }}">{{ category.name }}</input>
-                        {% endfor %}
-                </label> <br/>
+
+                <div class="Container_Auswahl">
+
+                    {% for category in categories %}
+                        <div>
+                            <input id="{{ category.id }}" type="checkbox" name="category_selected" value="{{ category.name }}">
+                                <label for="{{ category.id }}"> {{ category.name }} </label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <br/>
                 <button class="act-btn" type="submit">Weiter</button>
+                 <p><a href="{% url 'startpage' %}">Zurück</a></p>
             </form>
+            <br/>
 
-           <div class="containerActivity">
-                {% for activity in activities.all %}
-                    <div>
-                    <h3>{{ activity.name }}</h3>
 
-                    {% for categories in activity.categories.all %}
-                    <p>{{ categories.name }}</p>
 
-                        {% endfor %}
-                    </div>
-
-                {% endfor %}
-           </div>
         </main>
         <script src="{% static 'js/script.js' %}"></script>
     </body>
