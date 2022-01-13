@@ -4,23 +4,26 @@
     <meta charset="UTF-8">
     <title>Profile</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'main-registration.css' %}">
+    <link rel="stylesheet" href="{% static 'main-profile.css' %}">
+
+    <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+    </style>
 </head>
 <body>
     <div id="hintergrund"></div>
         <div id="wrapper"></div>
 
             <h1>Benutzerprofil</h1>
-            <p>{{ user.username }}</p>
+            <p class="left">Username: {{ user.username }}<br/>
+                Vorname: {{ user.first_name }} <br/>
+                  Nachname: {{ user.last_name }}</p>
     <div style="display: flex; justify-content: center">
         <img src="{{ profile.avatar.url }}" style="width: 20%; border-radius: 50%; object-fit: cover">
-        <p>{{ user.username }}</p>
-        <p>{{ user.first_name }}</p>
-        <p>{{ user.last_name }}</p>
     </div>
-    <p><a href="{% url 'activity_overview' %}">Zurück</a></p>
+    <p><button><a href="{% url 'activity_overview' %}">Zurück</a></button></p>
     <h3>Meine Aktivitäten</h3>
-    <ul>
+    <ul class="left">
         {% for created_activity in created_activities %}
         <li>{{ created_activity.name }}</li>
         {% endfor %}

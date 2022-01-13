@@ -4,11 +4,17 @@
 }
 
 body {
-    font-family: Helvetica, sans-serif;
+    font-family: 'Noto Sans', Helvetica, Arial, sans-serif;
     font-size: 20px;
     background-color: white;
     z-index: 1;
 }
+
+html {
+    font-size: 100%;
+    font-family: 'Noto Sans', Helvetica, Arial, sans-serif;
+}
+
 
 #hintergrund {
     background-color: #00677C;
