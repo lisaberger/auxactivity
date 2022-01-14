@@ -6,12 +6,14 @@ from accounts.models import UserProfile
 
 def startpage_view(request):
     current_user = request.user
-    # print(current_user)
-    # if current_user != "AnonymousUser":
-    #     user_profile = UserProfile.objects.get(user_id=current_user.id)
-    #
+    print(current_user)
+    try:
+        user_profile = UserProfile.objects.get(user_id=current_user.id)
+    except UserProfile.DoesNotExist:
+        user_profile = None
+
     context = {
- # 'profile': user_profile
-    }
+            'profile': user_profile
+        }
 
     return render(request, 'index.html', context)

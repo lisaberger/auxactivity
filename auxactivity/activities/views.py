@@ -25,16 +25,15 @@ def activity_overview(request):
     # Filters
     all_activities = models.Activity.objects.all()
     all_categories = models.Category.objects.all()
-    category_selected = request.GET.get('category_selected')
 
-    # categories_selected = request.GET.getlist('category_selected')
+    categories_selected = request.GET.getlist('categories_selected')
     name_search_query = request.GET.get('name_search')
 
-    if category_selected != '' and category_selected is not None:
-        all_activities = all_activities.filter(categories__name=category_selected)
-        # all_activities = all_activities.filter(categories__name__in=categories_selected).distinct()
+    if categories_selected != [''] and categories_selected is not None:
+        for category in categories_selected:
+            all_activities = all_activities.filter(categories__name=category)
 
-    elif name_search_query != '' and name_search_query is not None:
+    if name_search_query != '' and name_search_query is not None:
         all_activities = all_activities.filter(name__icontains=name_search_query)
 
     context = {
@@ -83,12 +82,23 @@ def activity_detail_view(request, activity_id):
 
     # An Aktivität teilnehmen
     if request.POST:
-        activity_id = request.POST['activity_to_participate']
-        activity = models.Activity.objects.all().get(id=activity_id)
-        print(activity_id)
-        current_user = request.user
-        activity.participants.add(current_user)
-        activity.save()
+        activity_id = request.POST.get('activity_to_participate', False)
+        if activity_id:
+            activity = models.Activity.objects.all().get(id=activity_id)
+            #print(activity_id)
+            current_user = request.user
+            activity.participants.add(current_user)
+            activity.save()
+
+    # Aktivität absagen
+    if request.POST:
+        activity_id = request.POST.get('activity_to_cancel_participation', False)
+        if activity_id:
+            activity = models.Activity.objects.all().get(id=activity_id)
+            print(activity_id)
+            current_user = request.user
+            activity.participants.remove(current_user)
+            activity.save()
 
     return render(request, 'activity_detail.html',
                   dict(activity=activity,

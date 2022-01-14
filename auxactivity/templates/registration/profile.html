@@ -1,33 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Profile</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'main-registration.css' %}">
-</head>
-<body>
-    <div id="hintergrund"></div>
-        <div id="wrapper"></div>
-
-            <h1>Benutzerprofil</h1>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mein Profil</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'profile.css' %}">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+        </style>
+    </head>
+    <body>
+        <header class="header">
+            <nav class="navbar">
+                <a href="{% url 'startpage' %}" class="nav-logo">auxactivity</a>
+                <ul class="nav-menu">
+                   <li class="nav-item">
+                        <a href="{% url 'edit_profile_url' %}" class="nav-link">bearbeiten</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'logout_url' %}" class="nav-link">logout</a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </header>
+        <main class="content">
+            <img src="{{ profile.avatar.url }}">
             <p>{{ user.username }}</p>
-    <div style="display: flex; justify-content: center">
-        <img src="{{ profile.avatar.url }}" style="width: 20%; border-radius: 50%; object-fit: cover">
-        <p>{{ user.username }}</p>
-        <p>{{ user.first_name }}</p>
-        <p>{{ user.last_name }}</p>
-    </div>
-    <p><a href="{% url 'activity_overview' %}">Zurück</a></p>
-    <h3>Meine Aktivitäten</h3>
-    <ul>
-        {% for created_activity in created_activities %}
-        <li>{{ created_activity.name }}</li>
-        {% endfor %}
-    </ul>
+            <p>{{ user.first_name }} {{ user.last_name }}</p>
 
-
-
-    </div>
+            <div class="container">
+                <div>
+                    <h3>Meine Aktivitäten</h3>
+                    <ul>
+                        {% for created_activity in created_activities %}
+                            <a href="{% url 'activity' created_activity.id %}">
+                                <li>{{ created_activity.name }}</li>
+                            </a>
+                        {% endfor %}
+                     </ul>
+                </div>
+                <div>
+                    <h3>Meine Teilnahmen</h3>
+                    <ul>
+                        {% for joined_activity in joined_activities %}
+                            <a href="{% url 'activity' joined_activity.id %}">
+                                <li>{{ joined_activity.name }}</li>
+                            </a>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <p><a href="{% url 'activity_overview' %}">Zurück</a></p>
+    </main>
 </body>
 </html>

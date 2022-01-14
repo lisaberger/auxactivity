@@ -10,7 +10,7 @@ html {
 }
 
 
-/* Navigationsleiste */ 
+/* Navigationsleiste */
 
 li {
     list-style: none;
@@ -86,10 +86,11 @@ a {
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 8rem;
+        top: 10rem;
         flex-direction: column;
         background-color: #3b7086;
         width: 100%;
+        border-radius: 10px;
         text-align: center;
         transition: 0.3s;
         box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
@@ -129,87 +130,43 @@ a {
 }
 
 /* Content */
-
 body {
     background-color: #3b7086;
     font-family: 'Noto Sans', Helvetica, Arial, sans-serif;
     font-size: 1.2rem;
-    position: relative;
     color: #fff;
 }
 
-.contend-centered {
+.content {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.contend-centered h1 {
-    margin-top: 2rem;
-}
-
-.contend-centered p {
-    margin: 2rem 0rem;
-}
-
-.contend-centered img {
-    width: 60%;
-    height: 65vh;
+.content img {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    width: 30rem;
+    border-radius: 100%;
     object-fit: cover;
-    border: 2px solid #fff;
-    border-radius: 2rem;
-}
-.inline-block {
-    display: inline-block;
-}
-#profile {
-    vertical-align: middle;
-    width: 3rem;
-    height: auto;
 }
 
-.join-btn {
-    left: 8rem;
-    background-color: #A1AA3D;
-    border: none;
-    border-radius: 10rem;
-    color: #fff;
-    padding: 2.0rem 5rem;
+.container {
+    background-color: #2A4D5C;
+    display: flex;
+    width: 100%;
+    padding: 2rem;
     margin-top: 3rem;
-    font-size: 1.3rem;
-    box-shadow: 0.3rem 0.5rem 1.2rem #2A4D5C ;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
-.join-btn:hover {
-    cursor: pointer;
-    background-color: #a3b31c;
+.container a {
+    text-decoration: none;
+    color: white;
 }
 
-.join-btn:active {
-    cursor: pointer;
-    background-color: #a3b31c;
-}
-
-.cancel-btn {
-    display: inline;
-    left: 8rem;
-    /*background-color: #A1AA3D;*/
-    background-color: darkred;
-    border: none;
-    border-radius: 10rem;
-    color: #fff;
-    padding: 2.0rem 5rem;
-    margin-top: 3rem;
-    font-size: 1.3rem;
-    box-shadow: 0.3rem 0.5rem 1.2rem #2A4D5C ;
-}
-
-.cancel-btn:hover {
-    cursor: pointer;
-    background-color: red;
-}
-
-.cancel-btn:active {
-    cursor: pointer;
-    background-color: #a3b31c;
+.container a:hover {
+    color: #3b7086;
 }

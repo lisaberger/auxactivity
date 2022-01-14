@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bearbeiten</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'editprofile.css' %}">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+        </style>
+    </head>
+    <body>
+        <header class="header">
+            <nav class="navbar">
+                <a href="{% url 'startpage' %}" class="nav-logo">auxactivity</a>
+                <ul class="nav-menu">
+                   <li class="nav-item">
+                        <a href="{% url 'startpage' %}" class="nav-link">startseite</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'logout_url' %}" class="nav-link">logout</a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </header>
+        <main class="content">
+            <form class="form" action="" method="post">
+                {% csrf_token %}
+                <h1>Profil bearbeiten</h1>
+                <label for="avatar">Profilbild</label>
+                <input class="input" type="file" name="profile" label="avatar">
+                <label for="vorname">Vorname</label>
+                <input class="input" type="text" name="firstname" label="vorname">
+                <label for="nachname">Nachname</label>
+                <input class="input" type="text" name="lastname" label="nachname">
+                <button class="act-btn" type="submit">Speichern</button>
+            </form>
+            <p><a href="{% url 'profile_url' %}">Zurück</a></p>
+        </main>
+    </body>
+</html>

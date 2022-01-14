@@ -184,13 +184,13 @@ body {
     font-size: 1.0rem;
 }
 
-.select-wrapper {
+/*.select-wrapper {
     width: 10rem;
     position: relative;
     background-color: #A1AA3D;
     margin-right: 0.9rem;
-}
-
+}*/
+/*
 .select-wrapper::before {
     font-family: 'fontello';
     content: "\f107";
@@ -201,10 +201,10 @@ body {
     color: #fff;
     background-color: #ffffff;
     pointer-events: none;
-    ;
-}
+    ;*/
+/*}*/
 
-select {
+/*select {
     -moz-appearance: none;
     -webkit-appearance: none;
     -moz-padding-start: calc(10px - 3px);
@@ -216,7 +216,7 @@ select {
     color: #fff;
     font-family: 'Noto Sans', Helvetica, Arial, sans-serif;
     font-size: 0.8rem;
-    /* box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.3); */
+    !* box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.3); *!
     border-radius: 3px;
     outline: none;
     cursor: pointer;
@@ -232,7 +232,7 @@ select:focus::-ms-value {
 
 select::-ms-expand {
     display: none;
-}
+}*/
 
 .searchbar {
     width: 20rem;
@@ -273,6 +273,9 @@ select::-ms-expand {
     border-top-right-radius: 0.6rem;
     object-fit: cover;
 }
+.size {
+    height: 35rem;
+}
 
 .activity-attributes {
     padding: 0.3rem;
@@ -305,6 +308,7 @@ select::-ms-expand {
     position: relative;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .category-item {

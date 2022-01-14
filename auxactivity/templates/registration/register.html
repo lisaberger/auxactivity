@@ -20,7 +20,12 @@
             <form class="form" method="POST">
                 <h1>Registrieren</h1>
                 {% csrf_token %}
+                <label for="Vorname">Vorname:</label>
+                <input type="text" name="firstname" label="Vorname">
+                <label for="Nachname">Nachname:</label>
+                <input type="text" name="lastname" label="Nachname">
                 {{ form.as_p }}
+                {{ profile_form.as_p }}
                 <button class="act-btn" type="submit">Registrieren</button>
                 <p class="zurueck"><a href="{% url 'startpage' %}">Zurück</a></p>
             </form>

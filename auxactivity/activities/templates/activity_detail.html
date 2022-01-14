@@ -51,6 +51,10 @@
                 {% csrf_token %}
             <button class="join-btn" type="submit" name="activity_to_participate" value="{{ activity.id }}">Teilnehmen</button>
             </form>
+            <form action="" method="POST">
+                {% csrf_token %}
+            <button class="cancel-btn" type="submit" name="activity_to_cancel_participation" value="{{ activity.id }}">Absagen</button>
+            </form>
             <p><a href="{% url 'activity_overview' %}">Zurück</a></p>
         </main>
 

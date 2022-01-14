@@ -53,7 +53,7 @@
 
                     {% for category in categories %}
                         <div>
-                            <input id="{{ category.id }}" type="checkbox" name="category_selected" value="{{ category.name }}">
+                            <input id="{{ category.id }}" type="checkbox" name="categories_selected" value="{{ category.name }}">
                                 <label for="{{ category.id }}"> {{ category.name }} </label>
                         </div>
                     {% endfor %}
