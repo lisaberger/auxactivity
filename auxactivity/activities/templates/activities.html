@@ -27,13 +27,15 @@
     <form method="GET" action=".">
         <!--{% csrf_token %}-->
         <!-- {{ form.as_p }}-->
-        <select name="category_selected">
-        <!--<select name="categoryies_selected" multiple>-->
-            <option selected value = ""></option>
-            {% for category in categories %}
-            <option value="{{ category.name }}">{{ category.name }}</option>
-            {% endfor %}
-        </select>
+        <label>
+            <select name="category_selected">
+            <!--<select name="categoryies_selected" multiple>-->
+                <option selected value = ""></option>
+                {% for category in categories %}
+                <option value="{{ category.name }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </label>
         <label for="searchbar">Search</label>
         <input type="search" name="name_search" id="searchbar" placeholder="Search Activities...">
         <p><button type="submit">Search</button></p>

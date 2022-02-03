@@ -172,7 +172,8 @@ body {
 .form-inline {
     display: flex;
     flex-flow: row wrap;
-    align-items: baseline;
+    align-items: flex-start;
+    padding-top: 1rem;
 }
 
 .srch-btn {
@@ -184,13 +185,79 @@ body {
     font-size: 1.0rem;
 }
 
+
+select {
+    color: white;
+  appearance: none;
+  background-color: #A1AA3D;
+  border: none;
+  padding: 0rem 1em 0 0;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: 1.2rem;
+  cursor: inherit;
+  line-height: inherit;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+select {
+    outline: none;
+}
+
+:root {
+  --select-border: #A1AA3D;
+  --select-focus: #A1AA3D;
+}
+
+
+.multiselect-wrapper {
+    margin: 0 2rem 0 0;
+  width: 100%;
+  min-width: 15ch;
+  max-width: 30ch;
+  border: 1px solid var(--select-border);
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #A1AA3D;
+}
+
+/* width */
+.multiselect-wrapper>::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.multiselect-wrapper>::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 1.0rem;
+}
+
+/* Handle */
+.multiselect-wrapper>::-webkit-scrollbar-thumb {
+    background: #3b7086;
+    border-radius: 1.0rem;
+}
+
+/* Handle on hover */
+.multiselect-wrapper>::-webkit-scrollbar-thumb:hover {
+    background: #2A4D5C;
+    border-radius: 1.0rem;
+}
+
+
 /*.select-wrapper {
     width: 10rem;
     position: relative;
     background-color: #A1AA3D;
     margin-right: 0.9rem;
-}*/
-/*
+
 .select-wrapper::before {
     font-family: 'fontello';
     content: "\f107";
@@ -201,10 +268,10 @@ body {
     color: #fff;
     background-color: #ffffff;
     pointer-events: none;
-    ;*/
-/*}*/
+    ;
+}
 
-/*select {
+select {
     -moz-appearance: none;
     -webkit-appearance: none;
     -moz-padding-start: calc(10px - 3px);
@@ -238,6 +305,7 @@ select::-ms-expand {
     width: 20rem;
     height: 2.5rem;
     padding-left: 0.5rem;
+    margin-top: 0.3rem;
     border-radius: 3px;
     margin-right: 0.9rem;
     border: none;

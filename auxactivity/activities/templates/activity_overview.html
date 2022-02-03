@@ -39,13 +39,14 @@
                 <h2>Finde spannende Aktivitäten</h2>
 
                 <form class="form-inline" method="GET" action=".">
-{#                    <select class="select-wrapper fa fa-car" name="category_selected" aria-placeholder="Choose Category">#}
-                        <select name="categories_selected" multiple>
+                    <div class="multiselect-wrapper">
+                        <select class="multiselect" name="categories_selected" multiple>
                             <option selected value = ""></option>
                             {% for category in categories %}
                             <option value="{{ category.name }}">{{ category.name }}</option>
                             {% endfor %}
-                    </select>
+                        </select>
+                    </div>
                     <input class="searchbar" type="search" name="name_search" id="searchbar" placeholder="Search Activities...">
                     <p><button class="srch-btn" type="submit">Filtern</button></p>
                 </form>
