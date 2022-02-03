@@ -85,21 +85,16 @@ def register_view(request):
 
     if request.method == 'POST':
         form = SignUpForm(request.POST)
-        print('geht')
-        profile_form = ProfileForm(request.POST)
+        profile_form = ProfileForm(request.POST, instance=request.user.profile)
         if form.is_valid() and profile_form.is_valid():
             user = form.save()
             user.refresh_from_db()  # load the profile instance created by the signal
             user.profile.avatar = form.cleaned_data.get('avatar')
             profile_form.save()
             user.save()
-            print('geht 1')
             raw_password = form.cleaned_data.get('password1')
-            print('geht2')
             user = authenticate(username=user.username, password=raw_password)
-            print('geht 3')
             login(request, user)
-            print('geht 4')
             return redirect('login_url')
     else:
         form = SignUpForm()

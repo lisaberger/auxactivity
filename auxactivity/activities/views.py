@@ -121,6 +121,10 @@ def activity_detail_view(request, activity_id):
 def filter_form(request):
     all_categories = models.Category.objects.all()
 
+    # Logged in user Profile Picture
+    current_user = request.user
+    user_profile = Profile.objects.get(user_id=current_user.id)
+
     category_id = request.GET.get('category')  # nur Text oder None
 
     if category_id:
@@ -131,6 +135,7 @@ def filter_form(request):
     return render(request, 'choose.html', dict(
         categories=all_categories,
         activities=activities,
+        userprofile=user_profile
     ))
 
 

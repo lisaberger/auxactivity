@@ -172,8 +172,9 @@ body {
 .form-inline {
     display: flex;
     flex-flow: row wrap;
-    align-items: flex-start;
-    padding-top: 1rem;
+    align-items: baseline;
+    flex-direction: row;
+    align-items: center;
 }
 
 .srch-btn {
@@ -195,7 +196,7 @@ select {
   margin: 0;
   width: 100%;
   font-family: inherit;
-  font-size: 1.2rem;
+  font-size: 1.0rem;
   cursor: inherit;
   line-height: inherit;
 }
@@ -215,6 +216,7 @@ select {
 
 
 .multiselect-wrapper {
+
     margin: 0 2rem 0 0;
   width: 100%;
   min-width: 15ch;
@@ -222,7 +224,7 @@ select {
   border: 1px solid var(--select-border);
   border-radius: 0.25em;
   padding: 0.25em 0.5em;
-  font-size: 1.25rem;
+  font-size: 0.5rem;
   cursor: pointer;
   line-height: 1.1;
   background-color: #A1AA3D;
@@ -305,7 +307,6 @@ select::-ms-expand {
     width: 20rem;
     height: 2.5rem;
     padding-left: 0.5rem;
-    margin-top: 0.3rem;
     border-radius: 3px;
     margin-right: 0.9rem;
     border: none;
@@ -324,6 +325,7 @@ select::-ms-expand {
     min-width: 15%;
     max-width: 20%;
     background-color: #ffffff;
+    height: 40rem;
     margin: 2rem;
     box-shadow: 0.0rem 0.0rem 1rem #aaaaaa;
     border-radius: 0.6rem;
@@ -364,8 +366,24 @@ select::-ms-expand {
     font-weight: 400;
     font-size: 1vw;
 }
+
+.act_date_place {
+    font-weight: 400;
+    font-size: 1vw;
+    font-size: 1.0rem;
+}
+
+.act_description_txt {
+    margin: 0.3rem 1rem;
+    font-size: 0.9rem;
+}
+
 #creator {
     font-size: 0.8rem;
+}
+
+.size {
+    height: 35rem;
 }
 
 .activity-attributes button {
@@ -385,4 +403,19 @@ select::-ms-expand {
     background-color: #2A4D5C;
     border-radius: 3px;
     margin: 0.3rem;
+}
+
+/*
+* Datepicker
+ */
+.datepicker-input {
+    background-color: #ffffff;
+    font-family: "Noto Sans", sans-serif;
+    /*background-image: url('calender_icon.jpg') ;*/
+    padding-left: 0.5rem;
+    border-radius: 3px;
+    margin-right: 0.9rem;
+    border: none;
+    height: 2.5rem;
+    color: #2A4D5C;
 }
