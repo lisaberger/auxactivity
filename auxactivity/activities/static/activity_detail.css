@@ -162,10 +162,16 @@ body {
 .inline-block {
     display: inline-block;
 }
+
 #profile {
     vertical-align: middle;
     width: 3rem;
     height: auto;
+}
+
+.participant_profile {
+    vertical-align: middle;
+    width: 3rem;
 }
 
 .join-btn {
@@ -212,4 +218,28 @@ body {
 .cancel-btn:active {
     cursor: pointer;
     background-color: #a3b31c;
+}
+
+#description {
+    margin: 1rem 20%;
+}
+
+#description {
+    margin: 1rem 20%;
+}
+
+#description {
+    margin: 1rem 20%;
+}
+
+#description {
+    margin: 1rem 20%;
+}
+
+#description {
+    margin: 1rem 20%;
+}
+
+#description {
+    margin: 1rem 20%;
 }

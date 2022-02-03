@@ -1,26 +1,39 @@
 from django import forms
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.dispatch import receiver
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.db.models.signals import post_save
-from .models import UserProfile
+from .models import Profile
 from activities import models
 from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
 
+
 class ProfileForm(forms.ModelForm):
     """Klasse zur Formularerstellung"""
     class Meta:
-        model = UserProfile
-        exclude = ['user']
+        model = Profile
+        fields = ('avatar',)
+
+
+class SignUpForm(UserCreationForm):
+    first_name = forms.CharField()
+    last_name = forms.CharField()
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'password1', 'password2')
 
 
 @login_required()
 def profile_view(request):
     current_user = request.user
-    user_profile = UserProfile.objects.get(user_id=current_user.id)
+    user_profile = Profile.objects.get(user_id=current_user.id)
     created_activities = models.Activity.objects.filter(creator_id=current_user.id)
     joined_activities = models.Activity.objects.filter(participants=current_user)
 
@@ -37,7 +50,7 @@ def profile_view(request):
 @login_required()
 def edit_profile_view(request):
     current_user = request.user
-    user_profile = UserProfile.objects.get(user_id=current_user.id)
+    user_profile = Profile.objects.get(user_id=current_user.id)
 
     context = {
         'user': current_user,
@@ -56,25 +69,47 @@ def logout_view(request):
 
 
 def register_view(request):
+    # if request.method == 'POST':
+    #     form = UserCreationForm(request.POST)
+    #     profile_form = ProfileForm(request.POST)
+    #
+    #     if form.is_valid():
+    #         form.save()
+    #         return redirect('login_url')
+    #
+    # else:
+    #     form = UserCreationForm()
+    #     profile_form = ProfileForm()
+    #
+    # return render(request, 'registration/register.html', dict(form=form, profile_form=profile_form))
+
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
+        print('geht')
         profile_form = ProfileForm(request.POST)
-        # first_name = request.POST.get('firstname')
-
-        if form.is_valid():
-            form.save()
+        if form.is_valid() and profile_form.is_valid():
+            user = form.save()
+            user.refresh_from_db()  # load the profile instance created by the signal
+            user.profile.avatar = form.cleaned_data.get('avatar')
+            profile_form.save()
+            user.save()
+            print('geht 1')
+            raw_password = form.cleaned_data.get('password1')
+            print('geht2')
+            user = authenticate(username=user.username, password=raw_password)
+            print('geht 3')
+            login(request, user)
+            print('geht 4')
             return redirect('login_url')
-
     else:
-        form = UserCreationForm()
+        form = SignUpForm()
         profile_form = ProfileForm()
-
-    return render(request, 'registration/register.html', dict(form=form, profile_form=profile_form))
+    return render(request, 'registration/register.html', {'form': form, 'profile_form': profile_form})
 
 
 def post_save_receiver(sender, instance, created, **kwargs):
     if created:
-        user_profile = UserProfile(user=instance)
+        user_profile = Profile(user=instance)
         user_profile.save()
 
 

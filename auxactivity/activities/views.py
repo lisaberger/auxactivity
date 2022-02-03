@@ -1,10 +1,13 @@
+from datetime import date
+
 from django import forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from . import models
-from accounts.models import UserProfile
+from accounts.models import Profile
 
 # Create your views here.
 
@@ -20,21 +23,30 @@ class ActivityForm(forms.ModelForm):
 def activity_overview(request):
     # Logged in user profile picture
     current_user = request.user
-    user_profile = UserProfile.objects.get(user_id=current_user.id)
+    user_profile = Profile.objects.get(user_id=current_user.id)
 
     # Filters
     all_activities = models.Activity.objects.all()
     all_categories = models.Category.objects.all()
 
-    categories_selected = request.GET.getlist('categories_selected')
+    categories_selected_query = request.GET.getlist('categories_selected')
     name_search_query = request.GET.get('name_search')
+    date_query = request.GET.get('date')
 
-    if categories_selected != [''] and categories_selected is not None:
-        for category in categories_selected:
+    all_activities = all_activities.filter(Q(date__isnull=True) | Q(date__gte=date.today()))
+
+    if categories_selected_query != [''] and categories_selected_query is not None:
+        for category in categories_selected_query:
             all_activities = all_activities.filter(categories__name=category)
 
     if name_search_query != '' and name_search_query is not None:
         all_activities = all_activities.filter(name__icontains=name_search_query)
+
+    if date_query != '' and date_query is not None:
+        all_activities = all_activities.filter(
+            Q(date=date_query) |
+            Q(date__isnull=True)
+        )
 
     context = {
         'activities': all_activities,
@@ -46,7 +58,6 @@ def activity_overview(request):
     if request.POST:
         activity_id = request.POST['activity_to_participate']
         activity = models.Activity.objects.all().get(id=activity_id)
-        print(activity_id)
         current_user = request.user
         activity.participants.add(current_user)
         activity.save()
@@ -74,11 +85,11 @@ def activity_detail_view(request, activity_id):
 
     # Logged in user Profile Picture
     current_user = request.user
-    user_profile = UserProfile.objects.get(user_id=current_user.id)
+    user_profile = Profile.objects.get(user_id=current_user.id)
 
     # Creator Profile Picture
     creatorofActivity = activity.creator
-    creator_profile = UserProfile.objects.get(user_id=creatorofActivity.id)
+    creator_profile = Profile.objects.get(user_id=creatorofActivity.id)
 
     # An Aktivität teilnehmen
     if request.POST:

@@ -47,6 +47,8 @@
                             {% endfor %}
                     </select>
                     <input class="searchbar" type="search" name="name_search" id="searchbar" placeholder="Search Activities...">
+                    <input type="date" class="datepicker-input" name="date" id="date">
+
                     <p><button class="srch-btn" type="submit">Filtern</button></p>
                 </form>
             </article>
@@ -65,8 +67,9 @@
                             </section>
                             <section class="activity-attributes">
                                 <h3>{{ activity.name }}</h3>
-                                <p>{{ activity.location }}</p>
-                                <p>{{ activity.description | truncatewords:10 }}</p>
+                                <p class="act_date_place"><strong>{{ activity.location }}</strong></p>
+                                <p class="act_date_place">{{ activity.date |date:"l, j.n. Y" |default:"Jederzeit" }}</p>
+                                <p class="act_description_txt">{{ activity.description | truncatewords:12}}</p>
                                 <a href="{% url 'activity' activity.id %}"><button class="act-btn">Details</button></a>
                                 <!-- <p id="creator">erstellt von lisab</p> -->
                             </section>

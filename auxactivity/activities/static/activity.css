@@ -171,8 +171,8 @@ body {
 
 .form-inline {
     display: flex;
-    flex-flow: row wrap;
-    align-items: baseline;
+    flex-direction: row;
+    align-items: center;
 }
 
 .srch-btn {
@@ -292,10 +292,16 @@ select::-ms-expand {
     margin-top: 0.3rem;
 }
 
-.activity-attributes p {
+.act_date_place {
     font-weight: 400;
-    font-size: 1vw;
+    font-size: 1.0rem;
 }
+
+.act_description_txt {
+    margin: 0.3rem 1rem;
+    font-size: 0.9rem;
+}
+
 #creator {
     font-size: 0.8rem;
 }
@@ -317,4 +323,94 @@ select::-ms-expand {
     background-color: #2A4D5C;
     border-radius: 3px;
     margin: 0.3rem;
+}
+
+/*
+* Datepicker
+ */
+.datepicker-input {
+    background-color: #ffffff;
+    font-family: "Noto Sans", sans-serif;
+    /*background-image: url('calender_icon.jpg') ;*/
+    padding-left: 0.5rem;
+    border-radius: 3px;
+    margin-right: 0.9rem;
+    border: none;
+    height: 2.5rem;
+    color: #2A4D5C;
+}
+
+/*
+* Datepicker
+ */
+.datepicker-input {
+    background-color: #ffffff;
+    font-family: "Noto Sans", sans-serif;
+    /*background-image: url('calender_icon.jpg') ;*/
+    padding-left: 0.5rem;
+    border-radius: 3px;
+    margin-right: 0.9rem;
+    border: none;
+    height: 2.5rem;
+    color: #2A4D5C;
+}
+
+/*
+* Datepicker
+ */
+.datepicker-input {
+    background-color: #ffffff;
+    font-family: "Noto Sans", sans-serif;
+    /*background-image: url('calender_icon.jpg') ;*/
+    padding-left: 0.5rem;
+    border-radius: 3px;
+    margin-right: 0.9rem;
+    border: none;
+    height: 2.5rem;
+    color: #2A4D5C;
+}
+
+/*
+* Datepicker
+ */
+.datepicker-input {
+    background-color: #ffffff;
+    font-family: "Noto Sans", sans-serif;
+    /*background-image: url('calender_icon.jpg') ;*/
+    padding-left: 0.5rem;
+    border-radius: 3px;
+    margin-right: 0.9rem;
+    border: none;
+    height: 2.5rem;
+    color: #2A4D5C;
+}
+
+/*
+* Datepicker
+ */
+.datepicker-input {
+    background-color: #ffffff;
+    font-family: "Noto Sans", sans-serif;
+    /*background-image: url('calender_icon.jpg') ;*/
+    padding-left: 0.5rem;
+    border-radius: 3px;
+    margin-right: 0.9rem;
+    border: none;
+    height: 2.5rem;
+    color: #2A4D5C;
+}
+
+/*
+* Datepicker
+ */
+.datepicker-input {
+    background-color: #ffffff;
+    font-family: "Noto Sans", sans-serif;
+    /*background-image: url('calender_icon.jpg') ;*/
+    padding-left: 0.5rem;
+    border-radius: 3px;
+    margin-right: 0.9rem;
+    border: none;
+    height: 2.5rem;
+    color: #2A4D5C;
 }

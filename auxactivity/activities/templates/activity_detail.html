@@ -38,13 +38,16 @@
                 <img id="profile" src="{{ creator_profile.avatar.url }}">
             </div>
             <img src="{{ activity.image.url }}">
-            <p>{{ activity.location }}</p>
-            <p>{{ activity.description }}</p>
+            <p>{{ activity.location }} </br>{{ activity.date |date:"l, j.n. Y" |default:"Jederzeit" }}</p>
+            <p id="description">{{ activity.description }}</p>
             <h2>Teilnehmer</h2>
 
             <ul>
                 {% for participant in activity.participants.all %}
-                    <li>{{ participant.username }}</li>
+                    <li>
+                        <img id="profile" src="{{ participant.userprofile.avatar.url }}" />
+                        {{ participant.first_name }} {{ participant.last_name }}
+                    </li>
                 {% endfor %}
             </ul>
             <form action="" method="POST">
